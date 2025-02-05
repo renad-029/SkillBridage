@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Course>
+
+@{
+    Layout = "~/Views/Shared/_layoutAdmin.cshtml";
+    ViewData["Title"] = "Update Course Status";
+}
+
+<h2>Course List</h2>
+<div class="container mt-5">
+    <div class="row mt-5">
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Course ID</th>
+                                <th>Course Name</th>
+                                <th>Course Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.Id</td>
+                                    <td>@item.Name</td>
+                                    <td>@item.Status</td>
+                                    <td>
+
+
+                                        <a asp-action="EditCourseStatus" asp-route-id="@item.Id">
+                                            <i class="fas fa-edit"></i> Edit
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,30 @@
+﻿@model SkillBridage.Models.Course
+@{
+    Layout = "~/Views/Shared/_layoutAdmin.cshtml";
+}
+
+<div class="container mt-5">
+    <div class="row mt-5">
+        <div class="card">
+            <div class="card-body">
+                <form asp-action="UpdateCourseStatus" method="post" enctype="multipart/form-data">
+                    <div class="row mt-5">
+                        <div class="col">
+                            <input type="hidden" asp-for="Id" />
+                        </div>
+                        <div class="col">
+                            <label class="form-label">Course Status</label>
+                            <select asp-for="Status" class="form-control" asp-items="Html.GetEnumSelectList<SkillBridage.Models.CourseStatus>()"></select>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col">
+
+                            <button type="submit" class="btn btn-primary">Update Status</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

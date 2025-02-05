@@ -1,0 +1,54 @@
+﻿@model IEnumerable<SkillBridage.Models.Booking>
+
+@{
+    Layout = "~/Views/Shared/_layoutUser.cshtml";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4" style="margin-top: 6rem;">My Bookings</h2>
+
+    @if (TempData["Message"] != null)
+    {
+        <div class="alert alert-info text-center">
+            @TempData["Message"]
+        </div>
+    }
+
+    <table class="table table-bordered table-hover text-center">
+        <thead class="thead-dark">
+            <tr>
+                <th>Course Name</th>
+                <th>Booking Date</th>
+                <th colspan="2">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var booking in Model)
+            {
+                <tr>
+                    <td>@booking.Course.Name</td>
+                    <td>@booking.BookingDate.ToString("yyyy-MM-dd")</td>
+                    <td>
+                        <div>
+                            <form asp-action="CancelBooking" method="post" class="d-inline">
+                                <input type="hidden" name="bookingId" value="@booking.Id" />
+                                <button type="submit" class="btn btn-danger btn-sm">
+                                    <i class="fa fa-trash" aria-hidden="true"></i> Cancel
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+
+                            <a href="@Url.Action("CourseDetails", "Booking", new { courseId = booking.Course.Id })"
+                               class="btn btn-info btn-sm">
+                                <i class="fa fa-eye" aria-hidden="true"></i> View Content
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

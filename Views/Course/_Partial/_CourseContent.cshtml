@@ -1,0 +1,71 @@
+﻿@model SkillBridage.Models.Course
+
+<div id="course-details" class="mt-5">
+    <div class="card">
+        <div class="card-body">
+            <h4>Course Details: @Model.Name</h4>
+            <p>Course Description: @Model.Description</p>
+
+            <h5>Contents:</h5>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Content Title</th>
+                        <th>Content Description</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.ContentItem != null && Model.ContentItem.Any())
+                    {
+                        foreach (var content in Model.ContentItem)
+                        {
+                            <tr>
+                                <td>@content.Title</td>
+                                <td>@content.Description</td>
+                                <td>
+                                    <!-- Edit Content Button with Icon -->
+                                    <a asp-action="EditContent" asp-route-id="@content.Id" class="btn btn-warning btn-sm">
+                                        <i class="fas fa-edit"></i> Edit
+                                    </a>
+
+                                    <!-- Delete Content Button with Icon -->
+                                    <button onclick="deleteContent('@Url.Action("DeleteContent", new { id = content.Id })')" class="btn btn-danger btn-sm">
+                                        <i class="fas fa-trash-alt"></i> Delete
+                                    </button>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="3" class="text-center">No content added yet.</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            <!-- Add New Content Form -->
+            <h5 class="mt-4">Add New Content</h5>
+            <form method="post" action="@Url.Action("AddContent")" onsubmit="return addContent(this);">
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="CourseId" value="@Model.Id" />
+                <div class="mb-3">
+                    <label class="form-label">Content Title</label>
+                    <input type="text" id="Title" name="Title" class="form-control" required />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Content Description</label>
+                    <textarea id="Description" name="Description" class="form-control" rows="3" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-plus"></i> Add Content
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Include Font Awesome -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">

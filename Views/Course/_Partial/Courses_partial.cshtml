@@ -1,0 +1,36 @@
+﻿<div id="courses-container" class="mt-5">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Course Name</th>
+                <th>Description</th>
+                <th>Number of Students</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var course in Model)
+            {
+                <tr>
+                    <td>@course.Name</td>
+                    <td>@course.Description</td>
+                    <td>@course.StudentCount</td>
+                    <td>@course.StartDate.ToString("yyyy-MM-dd")</td>
+                    <td>@course.EndDate.ToString("yyyy-MM-dd")</td>
+                    <td>@course.Status</td>
+                    <td>
+                        <a asp-action="EditCourse" asp-route-id="@course.Id" class="btn btn-warning btn-sm">
+                            <i class="fas fa-edit"></i> Edit
+                        </a>
+                        <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#del" onclick="setDeleteId(@course.Id)">
+                            <i class="fas fa-trash-alt"></i> Delete
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

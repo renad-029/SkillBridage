@@ -1,0 +1,191 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - SkillBridage</title>
+    <script type="importmap"></script>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/SkillBridage.styles.css" asp-append-version="true" />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="~/css/style.css">
+     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+     <script src="~/js/search.js"></script>
+     
+    
+    
+</head>
+
+<body data-page="@ViewData["PageId"]">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark py-3">
+            <div class="container-fluid">
+                <div class="brand-spacing">
+                    <div class="brand-svg">
+                        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#ffff;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                            <path d="M44 4H30.6666V17.3334H17.3334V30.6666H4V44H44V4Z" fill="url(#grad1)"></path>
+                        </svg>
+                    </div>
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">SkillsBridge</a>
+                </div>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <!-- Move navbar items to the right -->
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 d-flex justify-content-around px-3">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Home" asp-action="Course">Courses</a>
+                        </li>
+                        <li class="nav-item">
+                            <a id="dashboardButton" class="nav-link" onclick="window.location.href='@GetDashboardLink()';" style="cursor:pointer; display:none;">Dashboard</a>
+                        </li>
+                    </ul>
+
+                    <!-- Buttons (Login, Sign Up, Logout, Dashboard) remain the same -->
+                    <div class="d-flex">
+                        <button id="signInButton" class="btn btn-login" onclick="window.location.href='/Identity/Account/Login';">Login</button>
+                        <button id="registerButton" class="btn btn-signup" onclick="window.location.href='/Identity/Account/Register';">Sign Up</button>
+                        <button id="logoutButton" class="btn btn-login" onclick="window.location.href='/Identity/Account/Logout';">Sign out</button>
+                    </div>
+                </div>
+
+        </nav>
+    </header>
+
+    @* <div class="container"> *@
+    <main role="main" class="pb-3" style="flex: 1;">
+            @RenderBody()
+        </main>
+    @* </div> *@
+
+    <footer class="text-center py-4" style="bottom:0; position:relative; background:#001220;">
+        <p>&copy; 2025 SkillBridge. All rights reserved.</p>
+        <p>
+            <a href="/contact">Contact</a> |
+            <a href="/privacy-policy">Privacy Policy</a> |
+            <a href="/about">About Us</a>
+        </p>
+    </footer>
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    
+    
+
+    @await RenderSectionAsync("Scripts", required: false)
+
+    <script src="~/js/slider.js"></script>
+    @* <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> *@
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const PageId = document.body.getAttribute('data-page');
+
+            const signInButton = document.getElementById('signInButton');
+            const registerButton = document.getElementById('registerButton');
+            const logoutButton = document.getElementById('logoutButton');
+            const dashboardButton = document.getElementById('dashboardButton');
+
+            // استخدام Razor لإرسال حالة تسجيل الدخول (isAuthenticated) إلى JavaScript
+            const isAuthenticated = '@User.Identity.IsAuthenticated'.toLowerCase() === 'true';
+
+            // التعامل مع الصفحات الخاصة بتسجيل الدخول والتسجيل
+            if (PageId === 'login') {
+                signInButton.style.display = 'none';
+                registerButton.style.display = 'block';
+                logoutButton.style.display = 'none';
+                dashboardButton.style.display = 'none';
+            }
+            else if (PageId === 'register') {
+                signInButton.style.display = 'block';
+                registerButton.style.display = 'none';
+                logoutButton.style.display = 'none';
+                dashboardButton.style.display = 'none';
+            }
+            else {
+                if (isAuthenticated) {
+                    // إذا كان المستخدم مسجلاً، يظهر زر "تسجيل الخروج" وزر "لوحة التحكم"
+                    signInButton.style.display = 'none';
+                    registerButton.style.display = 'none';
+                    logoutButton.style.display = 'block';
+                    dashboardButton.style.display = 'block'; // عرض زر لوحة التحكم
+                } else {
+                    // إذا لم يكن المستخدم مسجلاً، يظهر فقط زر "تسجيل الدخول" و "إنشاء حساب"
+                    signInButton.style.display = 'block';
+                    registerButton.style.display = 'block';
+                    logoutButton.style.display = 'none';
+                    dashboardButton.style.display = 'none';
+                }
+            }
+        });
+    </script>
+
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <script>
+        var options = {
+            strings: ["Learn new skills", "Advance your career", "Master the latest technologies"],
+            typeSpeed: 50,
+            backSpeed: 25,
+            backDelay: 1000,
+            loop: true
+        };
+        var typed = new Typed(".auto-type", options);
+    </script>
+
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const PageId = document.body.getAttribute('data-page');
+            const navbar = document.getElementsByClassName('navbar')[0]; // Accessing the first navbar element
+
+            if (PageId === 'Home-page') {
+                navbar.style.backgroundColor = 'transparent'; // Using camelCase for the CSS property
+            } else {
+                navbar.style.backgroundColor = '#001220';
+            }
+        });
+    </script>
+
+    @functions {
+        public string GetDashboardLink()
+        {
+            if (User.IsInRole("Student"))
+            {
+                return "/Booking"; 
+            }
+            else if (User.IsInRole("Teacher"))
+            {
+                return "/Course"; 
+            }
+            else
+            {
+                return "/"; 
+            }
+        }
+    }
+
+
+</body>
+</html>

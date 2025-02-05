@@ -1,0 +1,33 @@
+@model IEnumerable<Booking>
+
+@{
+    Layout = "~/Views/Shared/_layoutUser.cshtml";
+
+    ViewData["Title"] = "Bookings";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4" style="margin-top: 6rem;">All Bookings</h2>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped mx-auto" style="max-width: 80%;">
+            <thead>
+                <tr>
+                    <th>Course</th>
+                    <th>Booking Date</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var booking in Model)
+                {
+                    <tr>
+                        <td>@booking.Course.Name</td> <!-- Display the course name -->
+                        <td>@booking.BookingDate.ToString("MM/dd/yyyy")</td> <!-- Display formatted date -->
+                        <td>@booking.Status</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

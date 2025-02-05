@@ -1,0 +1,91 @@
+﻿@model IEnumerable<Course>
+
+    @{
+        ViewData["PageClass"] = "Home-Page";
+        ViewData["PageId"] = "Home-page";
+
+    }
+    <div class="shaped-home-page">
+
+        <!-- Background Section -->
+        <div class="bg-container">
+            @* Uncomment this if you want to use a background image *@
+            <!-- <img src="/IMG/blob-scene-haikei.png" alt="blob scene bg" /> -->
+        </div>
+
+        <!-- White Section with Main Content -->
+        <div class="container home-page-header" style="padding: 50px; margin-top: 65px; max-width:80%; border-color:transparent;">
+            <div class="glass" style="border-color:transparent">
+                <div class="row">
+                    <h1 style="font-size: 55px; font-weight: 700; margin-bottom: 20px; color: #fff;">SkillsBridge empowers you to</h1>
+                    <h1 style="font-size: 55px; font-weight: 700; margin-bottom: 20px; color: #fff;"><span class="auto-type"></span></h1>
+                </div>
+                <div class="row align-items-center">
+                    <!-- Left Column (Text) -->
+                    <div class="col-md-7" style="display: flex; align-items: center; background-color: transparent; padding: 50px; border-radius: 20px; justify-content: flex-end; align-self:center;">
+                        <div style="flex: 1; text-align: end; color: #fff; padding-right: 40px; display: flex; flex-direction: column; justify-content: flex-start; align-items: flex-end;">
+                            <p class="text-start" style="font-size: 36px; line-height: 1.8; margin-bottom: 34px; margin-right: -38px; color: #C88DAC;">
+                                Unleash your potential 🚀
+                            </p>
+                            <div style="display: flex; flex-direction: row; justify-content: center; gap: 15px; width: 65%;">
+                                <!-- Button for Teacher Registration -->
+                                <a href="/Identity/Account/Register?role=Student" class="student-btn" style="align-self: end; font-size: 18px; width: 50%; font-weight: 500; color: #fff; background: linear-gradient(45deg, #AD3150, #033d85); border: none; border-radius: 99px; text-align: center; text-decoration: none; padding: 8px;">
+                                    Start as Student
+                                </a>
+                                <a href="/Identity/Account/Register?role=Teacher" class="teacher-btn" style="align-self: center; font-size: 18px; width: 50%; font-weight: 600; color: #ffffff; background: transparent; border: none; border-radius: 99px; text-align: center; border: 1px solid; border-color: white; text-decoration: none; padding: 8px;">
+                                    Become a Teacher
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column (Image) -->
+                    <div class="col-md-4">
+                        <img src="/IMG/4862436-0١-removebg.png" style="width: 100%; height: auto;" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pluralsight Section -->
+        <!-- Pluralsight Section -->
+        <section class="container d-flex pluralsight-section" style="padding: 40px 0; margin-top: 3%; display: flex; justify-content: space-between; align-items: center;">
+            <!-- Left Content Section -->
+            <div class="content" style="flex: 1; padding-right: 20px;">
+                <!-- Gradient Heading for Why Pluralsight -->
+                <h2 style="font-weight: 600; color: transparent; background: linear-gradient(45deg, #AD3150, #033d85); -webkit-background-clip: text; font-size: 36px; margin-bottom: 10px;">Why SkillsBridge?</h2>
+                <p style="font-size: 18px; line-height: 1.8; margin-bottom: 20px;">
+                    Whether you’re an individual looking to learn Python to advance your career or a team looking to streamline onboarding, reduce cycle times, or equip your workforce with the skills needed to achieve your goals, we eliminate the challenges and obstacles holding you back. At SkillsBridge, we're dedicated to advancing the world’s workforce by making your learning experience more efficient, effective, and rewarding—so you have more success stories to celebrate.
+                </p>
+            </div>
+
+            <!-- Right Image Section -->
+            <div class="image" style="flex: 1; padding-left: 20px; display: flex; justify-content: center; align-items: center;">
+                <img src="/IMG/learn-pic.svg" alt="Pluralsight Learn Image" style="max-width: 90%; height: auto; border-radius: 10px;" />
+            </div>
+        </section>
+
+        <!-- Pluralsight Section -->
+        <section class="container d-flex pluralsight-section" style="padding: 40px 0; margin-top: 1%; display: flex; justify-content: space-between; align-items: center;">
+            <!-- Left Content Section -->
+            <div class="content" style="flex: 1; padding-right: 20px;">
+                <!-- Gradient Heading for Why Pluralsight -->
+                <h2 style="font-weight: 600; color: transparent; background: linear-gradient(45deg, #AD3150, #033d85); -webkit-background-clip: text; font-size: 36px; margin-bottom: 10px;">See Our Courses</h2>
+                <p style="font-size: 18px; line-height: 1.8; margin-bottom: 20px;">
+                    Start Learning Today. Ready to dive in? Visit our course library to explore a variety of topics designed to boost your skills and empower your career. Whether you're getting started or leveling up, we have the resources you need.
+                </p>
+                <a href="@Url.Action("course", "Home")" class="btn" style="justify-content: center; display: flex; width: 50%; font-size: 18px; padding: 12px 25px; color: white; background: linear-gradient(45deg, #AD3150, #033d85); border-radius: 30px; text-decoration: none; transition: background-color 0.3s ease; margin-top: 15px;">
+                    See our Courses
+                </a>
+            </div>
+
+            <!-- Right Image Section -->
+            <div class="image" style="flex: 1; padding-left: 20px; display: flex; justify-content: center; align-items: center;">
+                <img src="/IMG/slazzer-edit-image.png" alt="Pluralsight Learn Image" style="max-width: 90%; height: auto; border-radius: 10px;" />
+            </div>
+        </section>
+
+
+
+
+    </div>

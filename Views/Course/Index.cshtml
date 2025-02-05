@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Course>
+
+@{
+    Layout = "~/Views/Shared/_layoutAdmin.cshtml";
+}
+
+<section class="d-flex justify-content-center align-items-center mt-0" style="height: 100vh;">
+    <div class="container">
+        <div class="row justify-content-center mb-5">
+            <div class="col-lg-4 col-sm-12 mb-4">
+                <div class="card shadow-lg border-light rounded text-center p-4">
+                    <div class="card-body">
+                        <h4 class="text-muted">Total Courses</h4>
+                        <h2 class="display-4 text-info">
+                            <span>@ViewBag.TotalCourses</span>
+                        </h2>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-sm-12 mb-4">
+                <div class="card shadow-lg border-light rounded text-center p-4">
+                    <div class="card-body">
+                        <h4 class="text-muted">Total Students</h4>
+                        <h2 class="display-4 text-info">
+                            <span>@ViewBag.TotalStudents</span>
+                        </h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Display Courses Details -->
+        <div class="row justify-content-center">
+            @if (Model != null && Model.Any()) // Check if there are courses
+            {
+                @foreach (var course in Model)
+                {
+                    <div class="col-lg-4 col-sm-12 mb-4">
+                        <div class="card shadow-lg border-light rounded text-center p-3">
+                            <div class="card-body bg-light">
+                                <h5 class="card-title text-primary">@course.Name</h5>
+                                <p><strong>Start Date:</strong> @course.StartDate.ToString("yyyy-MM-dd")</p>
+                                <p><strong>End Date:</strong> @course.EndDate.ToString("yyyy-MM-dd")</p>
+                                <p><strong>Registered Students:</strong> @course.Bookings?.Count </p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="col-12 text-center">
+                    <p class="text-danger">No courses are currently available.</p>
+                </div>
+            }
+        </div>
+    </div>
+</section>

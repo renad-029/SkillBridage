@@ -1,0 +1,38 @@
+﻿@model ContentItem
+
+@{
+    Layout = "~/Views/Shared/_layoutAdmin.cshtml";
+}
+
+<div class="container mt-5">
+    <div class="row mt-5">
+        <div class="card">
+            <div class="card-body">
+                <h4>Edit Course Content</h4>
+                <form asp-action="UpdateContent" method="post">
+                    <div class="row mt-5">
+                        <div class="col">
+                            <input type="hidden" asp-for="Id" />
+                            <input type="hidden" asp-for="CourseId" />
+
+                            <label class="form-label">Content Title</label>
+                            <input type="text" asp-for="Title" class="form-control" />
+                        </div>
+                        <div class="col">
+                            <label class="form-label">Content Description</label>
+                            <input type="text" name="Description" class="form-control" />
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col">
+                                <button type="submit" class="btn btn-primary w-100">Save</button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

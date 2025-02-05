@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Course>
+
+@{
+    Layout = "~/Views/Shared/_layoutAdmin.cshtml";
+    ViewData["Title"] = "Course Details and Content Management";
+}
+
+<h2>Course Details and Content Management</h2>
+
+<div class="container mt-5">
+    <!-- Course List -->
+    <div class="row">
+        <div class="col">
+            <label class="form-label">Select Course</label>
+            <select id="courseSelect" class="form-control" onchange="loadCourseDetails(this.value)">
+                <option value="">Select a Course</option>
+                @foreach (var course in Model)
+                {
+                    <option value="@course.Id">@course.Name</option>
+                }
+            </select>
+        </div>
+    </div>
+
+    <!-- Course details will be loaded here -->
+    <div id="courseDetails" class="mt-5">
+        <div class="alert alert-warning">Select a course to view its content</div>
+    </div>
+
+    <!-- Edit Course Button -->
+
+</div>
+
+    <script>
+        function loadCourseDetails(courseId) {
+            if (!courseId) {
+                $("#courseDetails").html('<div class="alert alert-warning">Select a course to view its content</div>');
+                $("#editCourseButton").prop("disabled", true); // Disable edit button if no course is selected
+                return;
+            }
+
+            $.get('/Course/GetCourseDetails', { courseId: courseId }, function (data) {
+                $("#courseDetails").html(data);
+                $("#editCourseButton").prop("disabled", false); // Enable edit button when a course is selected
+            });
+        }
+
+        function addContent(form) {
+            $.post(form.action, $(form).serialize(), function (data) {
+                $("#courseDetails").html(data);
+            });
+            return false;
+        }
+
+        function deleteContent(deleteUrl) {
+            $.post(deleteUrl, function (data) {
+                $("#courseDetails").html(data);
+            });
+        }
+
+
+    </script>

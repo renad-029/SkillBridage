@@ -1,0 +1,76 @@
+" <div class="container" style="padding: 50px;">
+    <div class="row">
+        @foreach (var course in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="course-card shadow-sm rounded" data-status="@course.Status" style="transition: transform 0.3s ease; cursor: pointer; border: none;">
+                    <img src="@Url.Content("~/IMG/" + course.Image)" alt="@course.Name" class="course-image rounded-top" style="width: 100%; height: 200px; object-fit: cover; border-radius: 12px;">
+                    <div class="course-content p-4" style="background: #fff; border-radius: 12px; display: flex; flex-direction: column; text-align: left;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 15px;">
+                            <!-- Course Title -->
+                            <h5 class="course-title" style="font-size: 1.4rem; font-weight: 700; color: #333; margin: 0;">
+                                @course.Name
+                            </h5>
+                            <!-- Status Badge -->
+                            <span class="status-badge" style="background-color: #37ab69; padding: 4px 12px; border-radius: 12px; font-weight: 600; color: #fff; white-space: nowrap;">
+                                @course.Status
+                            </span>
+                        </div>
+                        <!-- Course Description -->
+                        <p class="course-description" style="font-size: 1rem; color: #777; line-height: 1.5; margin-bottom: 15px;">
+                            @course.Description
+                        </p>
+                        <!-- Enroll Button -->
+                        <form asp-action="BookCourse" asp-controller="Booking" method="post" style="display: flex; justify-content: center; margin-top: 20px;">
+                            <input type="hidden" name="courseId" value="@course.Id" />
+                            <button type="submit" class="btn btn-primary" style="width: 135px; padding: 12px 20px; font-size: 1rem; font-weight: 600; border-radius: 30px; transition: all 0.3s ease;">
+                                Enroll Now!
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<style>
+    .course-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .course-title {
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: #333;
+    }
+
+    .course-description {
+        font-size: 1rem;
+        color: #777;
+        line-height: 1.5;
+    }
+
+    .status-badge {
+        background-color: #37ab69;
+        padding: 4px 12px;
+        border-radius: 12px;
+        font-weight: 600;
+        color: #fff;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border: none;
+        color: white;
+        font-size: 1rem;
+        font-weight: 600;
+        border-radius: 30px;
+        transition: background-color 0.3s ease;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+</style>"

@@ -1,0 +1,36 @@
+﻿@model SkillBridage.Models.Course
+@{
+    Layout = "~/Views/Shared/_layoutUser.cshtml";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4" style="margin-top: 6rem;">Course Content: @Model.Name</h2>
+
+    @if (Model.ContentItem != null && Model.ContentItem.Any())
+    {
+        <div class="card shadow-sm border-light rounded mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Course Contents:</h5>
+                <ul class="list-group">
+                    @foreach (var content in Model.ContentItem)
+                    {
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="mb-1">@content.Title</h6>
+                                <small class="text-muted">@content.Description</small>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    }
+    else
+    {
+        <p class="text-muted">No contents available for this course.</p>
+    }
+
+    <div class="text-center">
+        <a href="@Url.Action("MyBookings", "Booking")" class="btn btn-secondary">Back to My Bookings</a>
+    </div>
+</div>

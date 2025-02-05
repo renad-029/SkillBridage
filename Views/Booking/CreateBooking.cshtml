@@ -1,0 +1,22 @@
+
+@model Booking
+
+@{
+    ViewData["Title"] = "Create Booking";
+    Layout = "~/Views/Shared/_layoutUser.cshtml";
+}
+}
+
+<form asp-action="CreateBooking" method="post">
+    <div class="form-group">
+        <label for="CourseId">Select Course</label>
+        <select asp-for="CourseId" class="form-control" id="CourseId">
+            @foreach (var course in ViewBag.Courses as List<Course>)
+            {
+                <option value="@course.Id">@course.Name</option>
+            }
+        </select>
+    </div>
+    
+    <button type="submit" class="btn btn-primary mt-3">Book Now</button>
+</form>

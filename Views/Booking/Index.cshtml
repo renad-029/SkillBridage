@@ -1,0 +1,49 @@
+﻿@{
+    Layout = "~/Views/Shared/_layoutUser.cshtml";
+}
+
+<section class="mt-5">
+    <div class="container">
+        <div class="text-center mb-4">
+            <h4 class="page-title">Dashboard</h4>
+        </div>
+
+        <div class="row justify-content-center mb-4">
+            <div class="col-lg-6 col-md-8 col-sm-10">
+                <div class="card shadow-sm p-4 rounded text-center">
+                    <div class="card-body">
+                        <h4 class="m-b-20">Number of Courses Registered:</h4>
+                        <h2 class="text-center">
+                            <span>@ViewBag.NumberOfCourses</span>
+                        </h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            @if (ViewBag.CourseDetails != null && ViewBag.CourseDetails.Count > 0)
+            {
+                foreach (var course in ViewBag.CourseDetails)
+                {
+                    <div class="col-lg-4 col-md-6 col-sm-10 mb-4">
+                        <div class="card shadow-sm p-3 rounded">
+                            <div class="card-body bg-light">
+                                <h5 class="card-title text-primary">@course.CourseName</h5>
+                                <p><strong>Start Date:</strong> @course.StartDate</p>
+                                <p><strong>End Date:</strong> @course.EndDate</p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="col-12 text-center">
+                    <p class="text-muted">No courses currently available.</p>
+                </div>
+            }
+        </div>
+
+    </div>
+</section>

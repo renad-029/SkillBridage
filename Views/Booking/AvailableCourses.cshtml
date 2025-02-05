@@ -1,0 +1,47 @@
+﻿@model IEnumerable<SkillBridage.Models.Course>
+@{
+    Layout = "~/Views/Shared/_layoutUser.cshtml";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4" style="margin-top: 6rem;">Available Courses</h2>
+
+    @if (TempData["Message"] != null)
+    {
+        <div class="alert alert-info text-center">
+            @TempData["Message"]
+        </div>
+    }
+
+    <div class="row">
+        @foreach (var course in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-lg border-light rounded">
+                    <div class="card-body">
+                        <h4 class="card-title text-primary">@course.Name</h4>
+                        <p class="card-text">@course.Description</p>
+
+                        @if ((bool)ViewData[$"IsUserBooked_{course.Id}"])
+                        {
+                            <button disabled class="btn btn-secondary btn-block mb-2">Already Enrolled</button>
+
+                            <a href="@Url.Action("CourseDetails", "Booking", new { courseId = course.Id })"
+                               class="btn btn-success btn-block">
+                                View Content
+                            </a>
+                        }
+                        else
+                        {
+                            <form asp-action="BookCourse" method="post" class="d-inline">
+                                <input type="hidden" name="courseId" value="@course.Id" />
+                                <button type="submit" class="btn btn-primary btn-block">Enroll in Course</button>
+                            </form>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

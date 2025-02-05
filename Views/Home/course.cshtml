@@ -1,0 +1,85 @@
+﻿@model IEnumerable<Course>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["PageClass"] = "Home-Page";
+  
+
+}
+<div class="container" style="margin-top:7rem;">
+    <div class="row">
+        <div class="col-12 d-flex justify-content-center">
+            <div class="card" style="box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); border-radius: 15px; width: 80%; max-width: 700px; background-color: #ffffff; border: none;">
+                <div class="card-body">
+                    <div class="d-flex align-items-center" style="gap: 15px;">
+                        <!-- Search input -->
+                        <div class="input-group" style="width: 100%; max-width: 500px;">
+                            <input type="text"
+                                   id="search"
+                                   class="form-control form-control-lg"
+                                   placeholder="Search for a course..."
+                                   name="name"
+                                   oninput="Course(this.value)"
+                                   style="border-radius: 30px; padding: 15px 20px; font-size: 1.1rem; transition: all 0.3s ease; border: 2px solid #ddd; outline: none; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);"
+                                   onfocus="this.style.borderColor='#007bff'; this.style.boxShadow='0 4px 8px rgba(0, 123, 255, 0.2)';"
+                                   onblur="this.style.borderColor='#ddd'; this.style.boxShadow='0 4px 6px rgba(0, 0, 0, 0.1)';" />
+                        </div>
+                        <!-- Remove Filter Button -->
+                        <a asp-action="Course"
+                           class="btn"
+                           style="background-color: #007bff; color: #fff; padding: 15px 25px; font-size: 15px; font-weight: 600; border-radius: 30px; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; border: none; flex:1;">
+                            Remove Filter
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="coursesSearch2-container" style="margin-top: 2rem;">
+        @if (!Model.Any())
+        {
+            <div class="alert alert-warning text-center" style="box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); font-size: 1.2rem; padding: 20px; border-radius: 10px; background-color: #fff3cd; color: #856404; font-weight: 500;">
+                <p class="mb-0">No courses are currently available.</p>
+            </div>
+        }
+        else
+        {
+            <h2 class="text-center mb-4" style="font-size: 2rem; font-weight: 700; letter-spacing: 1px; font-weight: 600; color: transparent; background: linear-gradient(45deg, #AD3150, #033d85); -webkit-background-clip: text;">Available Courses</h2>
+            @Html.Partial("_Partial/_courseParial", Model)
+        }
+    </div>
+</div>
+
+@* <div class="container" style="padding: 50px;">
+    <h2 class="text-center mb-5">الدورات المتوفرة</h2>
+
+    <div class="row">
+            @foreach (var course in Model)
+            {
+            <div class="col">
+
+
+                <div class="course-card" data-status="@course.Status">
+                    <img src="@Url.Content("~/IMG/" + course.Image)" alt="@course.Name" class="course-image">
+                    <div class="course-content">
+                        <h5>@course.Name</h5>
+                        <p>@course.Description</p>
+                        <span class="status-badge">@course.Status</span>
+                        <form asp-action="BookCourse" asp-controller="Booking" method="post">
+                            <button type="button"
+                                    class="btn btn-details"
+                                    onclick="confirmBooking(@course.Id)">
+                                سجل بالدورة!
+                            </button>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+    </div> *@
+
+   
+
